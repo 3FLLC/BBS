@@ -1,0 +1,241 @@
+       Documentation for [XBBS] v2.3 Message System
+                Written by: Robert Crump
+            Northridge Systems RCP/M - [XBBS]
+               818-708-3284  300/1200 Baud
+
+
+     First a word on the program. This Message System uses high
+memory locations for storing the users password and user number.
+Also in hi memory the return flag is set for CP/M users that wish
+to re-enter [XBBS]. This flag MUST be cleared by BYE in order for
+a new user to log onto the system.
+
+INSTALLATION:
+
+     Step 1) Using DDT; obtain at least 7 bytes of free memory
+             in hi ram. Write the first number down; ie location
+             FA10=NOP.
+
+     Steð 2© Loaä thå basiã codå usinç MBASIÃ 5.² oò WÓ oò VEDIT.
+             Locatå thå equate at the top of the program -> RT
+             This is where you'll make your first change. Place
+             RT; the hé  memorù locatioî that you wrote down.
+             Iô  shoulä looë likå thisº RT=&HFA10. The rest of
+             the memory equates will set themselves.
+
+             The line should then look like this:
+
+             RT=&HFA10:RT1=(RT+1):RT2=(RT+6)
+
+     Step 3) System access and passwords.
+             a) SYS1$ place your first and last name here.
+             b) P1$ place quick CP/M access password here.
+                1) Any length may be used, it P1$="ABCDEFGHI"
+             c) P2$ place your sysop password here.
+                1) SYSOP MUST be first followed by the pw. ie:
+                   P2$="ABCDEFGHI"
+             d) P3$ Currently set to NOPASS. If CP/M access by
+                password is desired, replace NOPASS with the
+                desired password that you will give users. ie:
+                P3$="ABCDEFGHI" (any length)
+             e) P4$ MUST be 6 characters long. This is your
+                password that is entered into messages from you
+                to ALL or a named person. This protects msgs from
+                deletion by any other person but you. ie:
+                P4$="ABCDEF" Remember 6 is SIX; not 4 or 8 but 6.
+
+     Steð 4© Locatå RCP/Í - [XBBSÝ v2.3® Iî fronô oæ thaô puô the
+             name of your system in. ie:
+                    Northridge Systems RCP/M - [XBBS] v2.3
+             Iæ  yoõ arå noô aî RCP/Í yoõ maù deletå  RCP/M» BUÔ
+             the [XBBS] v2.2 must remain in place.
+
+
+
+Š
+
+     Now you are ALMOST ready to compile the program. You still
+have 2 things left to do.
+
+          1) Remove the remark statement from the line at the top
+             that reads: 'USER%=0:CALL USER(USER%)
+             note: If your system user call is USR replace CALL
+             USER with CALL USR.
+
+          2© Deletå linå 10000® Thió linå ió aî intentionaì BASCOM
+             fataì  error®  Iô ió placå therå tï seå iæ yoõ  reaä 
+             this documentation. If you saw it you either didn't
+             read this or you forgot to take it out. In any case
+             it MUST be removed.
+
+     Now save your modified program in ASCII. ie:
+                     SAVE"XBBSV23.BAS",A
+
+COMPILING:
+
+
+     Steð 1© Foò Z-8° users»  ruî BASCOÍ usinç  thå  /O/X/Ú 
+             switches. For non-Z-80 use drop the Z switch.
+
+     Steð 2© Linë thå resultanô REÌ filå witè L8° anä OBSLIB.REL,
+             incorporatinç the XBBSUSER.REL file (supplied).
+             note:
+               This file forces the system to always look at user
+               area 0 regardless of what user area you are on for
+               the user list; counters and associated files.
+
+
+             Your command line for linking (assuming all pgms.
+             for linking are on your A>) should look like this.
+
+                 A>L80 XBBSV23,XBBSUSER,OBSLIB/S,XBBS/N/E
+
+           You will now have a running COM file of the program.
+
+
+
+
+
+
+                     [MORE TO FOLLOW]
+
+
+
+
+
+
+
+
+
+Š
+
+BYE MODIFICATIONS:
+
+
+    You must have your BYE program clear the $ that was put into
+    RT as the return flag.
+
+      Step 1) In the general equate area, add 1 more.
+              RTFLG  EQU  0FA10H (your memory location).
+
+      Step 2) Find out where BYE clears the option flags.
+                  In BYE2 and MBYE-33 it's at label START2.
+                  The area should look something like this:
+
+                  START2:
+                         XRA   A
+                         STA   OPTION   ;clear options
+
+                  Alì yoõ neeä dï ió tï adä ouò returî flaç equ
+                  to that area. ie:
+
+                  START2:
+                         XRA   A
+                         STA   OPTION   ;clear options
+                         STA   RTFLG    ;clear XBBS return flag.
+
+
+     This MUST be done in order to allow a new user to log in, else
+[XBBS] will continue to welcome back the same user forever.
+
+      That is all there is to the Installation of the program!.
+
+
+OPERATING FILES:
+
+     Must files: INFO; BULLETIN; NEWCOM; MRH; MSH; MENU; ENTERCPM.
+Thå  abovå fileó havå beeî supplied®  Thå MRH»  MSH»  MENÕ  fileó 
+shoulä bå lefô aó theù are®  Thå otheró arå supplieä aó examples® 
+Modifù  theí  foò youò systeí anä taste®  Alì fileó  arå  withouô 
+extensions.
+
+
+
+
+
+                     [MORE TO FOLLOW]
+
+
+
+
+
+
+
+
+Š
+
+SYSOP FUNCTIONS:
+
+     Afteò logginç iî aó thå sysop¬  ieº  SYSOÐ 
+		Password=>ABCDEFGH
+At the command line you have the following added options. L,Z,P,D,Q.
+
+          L= List todays callers. (erase each day)
+          Z= List comments file. (erase each day)
+          P= Change a users password. You do this by request or
+             to LOCK out a user. Pick a 6 character password that
+             you want to use as a lock out key. When you get a
+             twit to log on; change his password to your selected
+             password to prevent him from logging in.
+     *****CAUTION*****
+             Selecô anä uså onlù ± locë ouô password® Iô getó
+             used in the XBBS23UT utility program.
+
+          D= Date function. You must enter the date as 10-DEC-84
+             This is a manual date function and again the utility
+             makes use of the date in THAT style to purge users.
+             Entereä iî anù otheò forí thå utilitù aó writteî
+             will not work. Check out the utility source code
+             and you'll see why.
+
+             JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC
+
+	  Q= List the xmodem.log (on A: user area 0)
+
+     RTC: You'll have to insert your own RTC code into both
+          message system and utility.
+
+     Also¬ logginç oî aó thå sysop¬ yoõ arå ablå tï reaä anä kilì 
+ALÌ messages»  privatå oò puplic® Privatå messageó arå denoteä bù 
+an * to the sidd of the subject.
+
+
+XBBS23UT.BAS UTILITY
+
+     Locatå  aô  thå toð oæ thå prograí thå  equaô  LCK$="ABCDEF"® 
+Changå thaô valuå tï YOUÒ locë ouô password®  Locatå CLS¤ anä puô 
+in your screen clear code or codes. Compile if desired (I do).
+
+     Functions: P,U,B,R,E
+
+          P= Purge the message and summary files.
+          U= Purge the user file.
+             This should be done once a month. Users that don't
+             call back in 30 days will be deleted and the file
+             packed. Users that have been locked out will be
+             deleted as well. After 3 or 4 times of use, all
+             of your frequent callers will be at the top of the
+             list and there user number will not change. Upon
+             use; post a bulletin that the list has been purged
+             anä tï receivå therå ne÷ numbeò, log on with there
+             first and last name. A minor inconvinence for fast
+             log on's.
+Š
+          B= Build a summary file from the message file.
+             This should only be used in the event that your
+             summary file gets trashed. You will use the P
+             function more than you'll use this one.
+
+          R= Reset your counters.
+
+          E= Exit to CP/M          
+
+
+     É  hopå  thaô thió documentatioî haó beeî oæ helð tï yoõ  iî 
+gettinç  started®  Enjoù beinç á SYSOP!®  Anù questionó abouô thå 
+prograí  shoulä  bå senô tï må aô thå numbeò aô thå toð  oæ  thió 
+doc.
+
+                         Good Luck,
+
+                              Robert Crump     
