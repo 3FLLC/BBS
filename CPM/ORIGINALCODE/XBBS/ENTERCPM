@@ -1,0 +1,14 @@
+To re-enter Bulletin Board type XBBS.
+
+To get directory of all drives, all
+user areas; type from the A0> prompt:
+             DIR $ADL
+    Do this first and save time.
+(Omit the L if no LBR directories wanted.)
+
+Use type for listing files or library
+directories. If in doubt just enter TYPE.
+ 
+Use Xmodem for file transfers.
+
+Please type BYE before disconnecting.
