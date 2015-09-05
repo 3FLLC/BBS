@@ -1,0 +1,17 @@
+
+            Functions supported by [XBBS] 2.3
+
+     A >> Re-scan for Msgs. E >> Enter a message
+     K >> Read bulletin     R >> Retrieve a message
+     K >> Kill a message    I >> Re-type information
+     S >> Message headings  X >> Expert user mode
+     C >> Exit to CP/M      G >> Exit system (Hang up)
+
+     In the R mode all messages above your entry number,
+     will be shown 1 at a time; followed by a command
+     prompt. Help menu is available. Multiple retreival
+     of known message numbers?   Yes!!
+
+     Example>> From main command line only!
+               R;1;5;7;9;10 will retreive those numbers.
+     To advance to next pre-selected number just enter 
