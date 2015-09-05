@@ -1,0 +1,21 @@
+                     ***************************
+                     *   Functions supported   *
+      **********************************************************
+      * B -->  type Bulletins    *  R -->  Retrieve Messages   *
+      * C -->  exit to CP/M      *  S -->  Scan Messages       *
+      * E -->  Enter message     *  T -->  bell on/off Toggle  *
+      * G -->  Goodbye (hang-up) *  U -->  list User file      *
+      * K -->  Kill message      *  W -->  retype Welcome      *
+      * P -->  Password Change   *  X -->  eXpert user mode    *
+      *                          *  N -->  phoNe list          * 
+      **********************************************************
+      Commands may be strung together, separated by semicolons.
+        -- For example, 'R;123' retrieves message # 123.
+        -- To read messages continuously, add a '+' sign after
+        -- the message number. 'R;10+' prints from message 10 on.
+
+        Software exchange is done under CP/M using the XMODEM
+        program (for intelligent transfer) or the TYPE fn.ft
+        command (simple ASCII listing).
+        From CP/M, the CHAT mode to the SYSOP, may be entered
+        by simply typing 'CHAT'.
