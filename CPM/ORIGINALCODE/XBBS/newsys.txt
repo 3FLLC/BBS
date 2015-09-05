@@ -1,0 +1,65 @@
+Northridge Systems RCP/M - XBBS v2.3
+
+User Numbers:
+     When you log on (1st time) you are given a user number.
+This will allow you a quicker log on the next time you call.
+If you should forget it, just enter your name and it'll be
+given to you again. About once a month the user list will be
+purged. At this time your user number will change. If you call
+and enter your old number and get-> Welcome back, Jane Doe
+and since you are John Doe you know that isn't right, at the
+password prompt, a carriage return will take you back to the
+name prompt. Enter your name and get your new user number.
+
+Message system:
+
+  Scanning-
+          There are 2 ways of entering the scan mode.
+1) At the command prompt enter an S and then answer the
+   question as to the number.
+
+2) At the command prompt enter an S followed by a simicolon
+   and the message number you want to start the scan at. Ie. S;1
+
+Both methods will respond with a listing of 20 messages; followed
+by a sub-command prompt. Help is available on that line.
+
+   Message retrieval-
+          The same applies here as above with a couple of
+   acceptions.
+1) At the command prompt enter an R and then answer the number
+   question as to where to start. You'll be given 1 message at
+   a time, followed by a sub-command prompt. There is help
+   available on this line.
+
+2) At the command prompt enter an R followed by a simicolon
+   and the message number. Ie  R;1  Same result as above.
+   No + is needed!!!
+
+3) At the command prompt enter an R followed by a simicolon
+   and the know message numbers. Ie  R;1;4;6;8;9
+   This will start a mass retreival of those messages, 1 at
+   a time. To get the next in line just answer the sum-command
+   with a M  The next message will then be displayed.
+
+Killing:
+
+   If you are allowed to kill a message, there are two ways of
+   doing that. Each one message at a time. 
+
+1) From the command line either a K followed by answering the
+   number question; or a K;1 will kill message number 1.
+
+2) While in the message retreival, at the sub-command line you
+   can kill the currently displayed message. However, be it
+   known that this will (as written now) take you out of the
+   retreive mode and return you to the main command line.
+   This applies to the mass retreive as well. I plan on changing
+   that in v2.3.
+
+The rest is self explanatory. Any question or comments, please
+leave me a comment upon exiting the system. I hope you enjoy
+this new system.
+
+                        Robert Crump
+                        Sysop, Northridge Systems
